@@ -2,19 +2,23 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react';
 import 'semantic-ui-css/semantic.min.css';
 
-import { Checkbox, CheckboxProps } from '.';
+import { RadioInput, RadioProps } from '.';
 
 export default {
-  title: 'Example/Checkbox',
-  component: Checkbox,
+  title: 'Main/Radio',
+  component: RadioInput,
   argTypes: {
     label: { control: 'text' },
+    checked: { control: 'boolean' },
+    value: { control: 'text' },
   },
 } as Meta;
 
-const Template: Story<CheckboxProps> = (args) => <Checkbox {...args} />;
+const Template: Story<RadioProps> = (args) => <RadioInput {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
   label: 'Option A',
+  checked: false,
+  value: 'a',
 };
