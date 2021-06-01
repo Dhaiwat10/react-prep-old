@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 import { RadioGroup } from '../RadioGroup';
+
+import classes from './Question.module.css';
 
 export interface QuestionProps {
   question: string;
@@ -47,10 +49,12 @@ export const Question: React.FC<QuestionProps> = ({
   ];
 
   return (
-    <div>
-      <p>{question}</p>
+    <Form className={classes.Container}>
+      <label>{question}</label>
       <RadioGroup items={items} onChange={onChange} selection={selection} />
-      <Button onClick={onSubmit}>Submit</Button>
-    </div>
+      <Button primary onClick={onSubmit}>
+        Submit
+      </Button>
+    </Form>
   );
 };

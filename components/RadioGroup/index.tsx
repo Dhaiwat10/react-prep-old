@@ -1,6 +1,7 @@
 import React from 'react';
 import { CheckboxProps, Form } from 'semantic-ui-react';
 import { RadioInput } from '../RadioInput';
+import classes from './RadioGroup.module.css';
 
 export interface RadioGroupProps {
   items: Array<{ value: string; label: string }>;
@@ -22,18 +23,16 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   };
 
   return (
-    <Form>
-      <Form.Group className="RadioGroup">
-        {items.map(({ label, value }, idx) => (
-          <RadioInput
-            checked={value === selection}
-            onChange={onValueChange}
-            label={label}
-            value={value}
-            key={idx}
-          />
-        ))}
-      </Form.Group>
-    </Form>
+    <Form.Group className={classes.RadioGroup}>
+      {items.map(({ label, value }, idx) => (
+        <RadioInput
+          checked={value === selection}
+          onChange={onValueChange}
+          label={label}
+          value={value}
+          key={idx}
+        />
+      ))}
+    </Form.Group>
   );
 };

@@ -1,0 +1,10 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.Container button {
+  width: fit-content;
+  margin: 0;
+}
