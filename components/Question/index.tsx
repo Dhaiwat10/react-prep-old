@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { RadioGroup } from '../RadioGroup';
+import { Choices, Question as QuestionTypes } from '../../types';
 
 import classes from './Question.module.css';
 
-export interface QuestionProps {
-  question: string;
-  options: Array<string>;
-  answer: 'a' | 'b' | 'c' | 'd';
+export interface QuestionProps extends QuestionTypes {
+  onChoice: (
+    question: QuestionTypes,
+    questionIndex: number,
+    choice: Choices
+  ) => void;
+  questionIndex: number;
+  disabled: boolean;
+  choice: Choices;
 }
 
 export const Question: React.FC<QuestionProps> = ({
   question,
   options,
   answer,
+  onChoice,
+  questionIndex,
+  disabled,
+  choice,
 }) => {
   const [selection, setSelection] = useState();
 
@@ -22,10 +32,8 @@ export const Question: React.FC<QuestionProps> = ({
   };
 
   const onSubmit = () => {
-    if (selection === answer) {
-      alert('Correct');
-    } else {
-      alert('Incorrect');
+    if (!disabled) {
+      onChoice({ question, options, answer }, questionIndex, selection);
     }
   };
 
@@ -48,11 +56,23 @@ export const Question: React.FC<QuestionProps> = ({
     },
   ];
 
+  const resetState = () => {
+    setSelection(null);
+  };
+
+  useEffect(() => {
+    resetState();
+  }, [question]);
+
   return (
     <Form className={classes.Container}>
       <label>{question}</label>
-      <RadioGroup items={items} onChange={onChange} selection={selection} />
-      <Button primary onClick={onSubmit}>
+      <RadioGroup
+        items={items}
+        onChange={onChange}
+        selection={choice ? choice : selection}
+      />
+      <Button primary onClick={onSubmit} disabled={disabled}>
         Submit
       </Button>
     </Form>
