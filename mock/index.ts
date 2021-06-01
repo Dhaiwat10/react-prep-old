@@ -7,9 +7,9 @@ export const questions: Array<Question> = [
     options: ['A', 'B', 'C', 'D'],
   },
   {
-    question: '2. Select the correct option.',
+    question: '2. This is a test question.',
     answer: 'b',
-    options: ['A', 'B', 'C', 'D'],
+    options: ['React', 'Vue', 'Angular', 'Flutter'],
   },
   {
     question: '3. Select the correct option.',

@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Quiz } from '../components/Quiz';
 import { Title } from '../components/Title';
-import { questions } from '../mock';
+import { getQuestions } from '../lib';
+import { Question } from '../types';
 
 function Home(): React.ReactNode {
+  const [questions, setQuestions] = useState<Array<Question>>([]);
+
+  useEffect(() => {
+    getQuestions().then((res) => setQuestions(res));
+  }, []);
+
   return (
     <>
       <div style={{ margin: 'auto', width: 'fit-content' }}>
         <Title text="Hello" />
-        <Quiz questions={questions} />
+        {questions.length > 0 && <Quiz questions={questions} />}
       </div>
     </>
   );
